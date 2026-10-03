@@ -1,12 +1,12 @@
 ---
-import { themeConfig } from '~/.config'
+import { themeConfig } from "~/.config";
 
-const { navLinks, socialLinks } = themeConfig.site
-const { translate: t } = Astro.locals
+const { navLinks, socialLinks } = themeConfig.site;
+const { translate: t } = Astro.locals;
 ---
 
 <nav class="text-center font-bold" flex="~ col gap-4">
-  <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center">
+  <!-- <ul lg="flex-col items-start text-4" class="text-3.5" flex="~ row gap-2 justify-center">
     {
       navLinks.map((nav) => (
         <li>
@@ -16,16 +16,21 @@ const { translate: t } = Astro.locals
         </li>
       ))
     }
-  </ul>
+  </ul> -->
   <ul flex="~ row gap-1 justify-center">
-    {
-      socialLinks.map(({ href, name }) => (
-        <li>
-          <a href={href} target="_blank" title={name} class="not-underline-hover inline-flex items-center">
-            <span class:list={[`i-mdi-${name}`, 'w-6 h-6']}>{name}</span>
-          </a>
-        </li>
-      ))
-    }
+    {socialLinks.map(({ href, name }) => (
+      <li>
+        <a
+          href={href}
+          target="_blank"
+          title={name}
+          class="not-underline-hover inline-flex items-center rounded-5px transition-colors duration-300 ease-in-out"
+          hover="c-background bg-primary"
+          active="opacity-50"
+        >
+          <span class:list={[`i-mdi-${name}`, "w-6 h-6"]} />
+        </a>
+      </li>
+    ))}
   </ul>
 </nav>

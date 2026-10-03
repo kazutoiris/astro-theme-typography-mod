@@ -3,11 +3,9 @@ import sitemap from '@astrojs/sitemap'
 import swup from '@swup/astro'
 import robotsTxt from 'astro-robots-txt'
 import { defineConfig } from 'astro/config'
-import rehypeKatex from 'rehype-katex'
-import remarkMath from 'remark-math'
 import UnoCSS from 'unocss/astro'
-import devtoolsJson from 'vite-plugin-devtools-json'
 import { themeConfig } from './src/.config'
+import compress from '@playform/compress';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,21 +13,37 @@ export default defineConfig({
   prefetch: true,
   base: '/',
   vite: {
-    plugins: [
-      // eslint-disable-next-line ts/ban-ts-comment
-      // @ts-ignore
-      devtoolsJson(),
-    ],
+    environments: {
+      client: {
+        build: {
+          rollupOptions: {
+            output: {
+              entryFileNames: 'js/[hash:8].js',
+              chunkFileNames: 'js/chunks/[hash:8].js',
+              assetFileNames: 'asset/[hash:8][extname]',
+              hashCharacters: 'hex',
+            },
+          },
+        },
+      },
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          entryFileNames: 'js/[hash:8].js',
+          chunkFileNames: 'js/chunks/[hash:8].js',
+          assetFileNames: 'asset/[hash:8][extname]',
+          hashCharacters: 'hex',
+        },
+      },
+    },
   },
   markdown: {
-    remarkPlugins: [
-      remarkMath,
-    ],
-    rehypePlugins: [
-      rehypeKatex,
-    ],
     shikiConfig: {
-      theme: 'dracula',
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
       wrap: true,
     },
   },
@@ -38,6 +52,7 @@ export default defineConfig({
     mdx({}),
     robotsTxt(),
     sitemap(),
+    compress(),
     swup({
       theme: false,
       animationClass: 'transition-swup-',
@@ -47,6 +62,7 @@ export default defineConfig({
       smoothScrolling: true,
       updateHead: true,
       updateBodyClass: true,
+      containers: ['#toc-container', "main"],
     }),
   ],
 })

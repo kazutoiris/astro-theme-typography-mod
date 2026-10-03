@@ -14,6 +14,13 @@
 <b>English</b> | <a href="./README.zh-CN.md">简体中文</a>
 </p>
 
+## ✨ Mod
+
+1. Updated all dependencies to the latest version.
+2. Added TOC support.
+3. Additional animations/UI improvements.
+4. Build compression support.
+
 ## Features
 
 - Build with **Astro**, **TypeScript** and **UnoCSS**

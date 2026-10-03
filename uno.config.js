@@ -17,24 +17,64 @@ const cssExtend = {
     '--prose-borders': '#eee',
   },
 
-  'code::before,code::after': {
+  'a': {
+    'text-decoration-style': 'wavy',
+    'text-underline-offset': '1px',
+    'text-decoration-skip-ink': 'none',
+  },
+
+  'code::before': {
     content: 'none',
   },
 
-  ':where(:not(pre):not(a) > code)': {
-    'white-space': 'normal',
-    'word-wrap': 'break-word',
-    'padding': '2px 4px',
-    'color': '#c7254e',
-    'font-size': '90%',
-    'background-color': '#f9f2f4',
-    'border-radius': '4px',
+  'code::after': {
+    content: 'none',
+  },
+
+  ':where(h1, h2, h3, h4, h5, h6)::before': {
+    'content': '"#"',
+    'position': 'absolute',
+    'left': '-1.2em',
+    'opacity': '0',
+    'transition': 'opacity 0.2s ease',
+  },
+
+  ':where(h1, h2, h3, h4, h5, h6):hover::before': {
+    'opacity': '0.5',
+  },
+
+  'code': {
+    'background-color': 'transparent',
+    'display': 'inline-block',
+    'border': '1px dashed var(--un-prose-code)',
+    'border-radius': '5px',
+    'padding': '0.1rem 0.2rem',
+    'margin': '0 0.2rem',
+  },
+
+  'pre': {
+    'border': '1px dashed var(--un-prose-code)',
+    'border-radius': '5px',
   },
 
   'li': {
     'white-space': 'normal',
     'word-wrap': 'break-word',
   },
+
+  'html.dark .astro-code, html.dark .astro-code span': {
+    'color': 'var(--shiki-dark) !important',
+    'background-color': 'var(--shiki-dark-bg) !important',
+    'font-style': 'var(--shiki-dark-font-style) !important',
+    'font-weight': 'var(--shiki-dark-font-weight) !important',
+    'text-decoration': 'var(--shiki-dark-text-decoration) !important',
+  }
+}
+
+const colorScheme = {
+  "bullets": [colorsLight.primary, colorsDark.primary],
+  "counters": [colorsLight.primary, colorsDark.primary],
+  "code": [colorsLight.primary, colorsDark.primary],
 }
 
 export default defineConfig({
@@ -55,10 +95,10 @@ export default defineConfig({
   ],
   presets: [
     presetWind3(),
-    presetTypography({ cssExtend }),
+    presetTypography({ cssExtend, colorScheme }),
     presetAttributify(),
     presetIcons({ scale: 1.2, warn: true }),
-    presetTheme ({
+    presetTheme({
       theme: {
         dark: {
           colors: { ...colorsDark, shadow: '#FFFFFF0A' },

@@ -1,10 +1,14 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "lib": ["esnext", "dom"],
-    "baseUrl": ".",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": [
+        "./src/*"
+      ]
     }
   },
   "include": [
@@ -13,5 +17,15 @@
     ".astro/types.d.ts",
     "**/*"
   ],
-  "exclude": ["dist"]
+  "exclude": [
+    "dist"
+  ],
+  "contentMappers": [
+    {
+      "package": "@astrojs/ts-content-mapper",
+      "extensions": [
+        ".astro"
+      ]
+    }
+  ]
 }
