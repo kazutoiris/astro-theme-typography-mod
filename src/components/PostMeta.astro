@@ -15,7 +15,10 @@ const categoryList = post.data.categories ?? [];
 
 <header flex="~ col gap-2">
   <h1 class="post-title">
-    <a class="not-prose" href={`/posts/${post.id}/`}>
+    <a
+      class="not-prose"
+      href={`/posts/${post.data.pubDate?.getFullYear()}/${String(post.data.pubDate?.getMonth() + 1).padStart(2, "0")}/${post.id}/`}
+    >
       {post.data.title}
     </a>
   </h1>

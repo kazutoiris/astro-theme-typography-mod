@@ -11,7 +11,7 @@ interface Props {
 
 const { id, data } = Astro.props.post;
 
-const path = `/posts/${id}`;
+const path = `/posts/${data.pubDate?.getFullYear()}/${String(data.pubDate?.getMonth() + 1).padStart(2, "0")}/${id}/`;
 const url = `${Astro.site?.href}${path}`;
 
 const provider = getProvider();

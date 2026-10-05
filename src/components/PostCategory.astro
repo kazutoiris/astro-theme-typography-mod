@@ -1,18 +1,18 @@
 ---
-import { themeConfig } from '~/.config'
-import { getPathFromCategory } from '~/utils'
+import { themeConfig } from "~/.config";
+import { getPathFromCategory } from "~/utils";
 
 interface Props {
-  category: string
+  category: string;
 }
 
-const { category } = Astro.props
+const { category } = Astro.props;
 
 function getCategoryUrl(category: string) {
-  return `/categories/${getPathFromCategory(category, themeConfig.site.categoryMap)}`
+  return `/categories/${getPathFromCategory(category, themeConfig.site.categoryMap)}`;
 }
 ---
 
-<a href={getCategoryUrl(category)}>
+<a href={getCategoryUrl(category)} class="mr-2">
   # {category}
 </a>

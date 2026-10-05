@@ -31,7 +31,7 @@ function getCustomData() {
 
 function getPostItem(post: Post) {
   const postItem = {
-    link: `/posts/${post.id}/`,
+    link: `/posts/${post.data.pubDate?.getFullYear()}/${String(post.data.pubDate?.getMonth() + 1).padStart(2, "0")}/${post.id}/`,
     author: post.data.author ?? author,
     content: getPostContent(post),
     title: post.data.title,

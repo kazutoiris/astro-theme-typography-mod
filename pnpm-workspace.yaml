@@ -3,5 +3,6 @@ allowBuilds:
   sharp: true
   simple-git-hooks: true
   swup: true
+  workerd: true
 minimumReleaseAgeExclude:
   - '@types/node@26.6.4'

@@ -6,12 +6,17 @@ import { defineConfig } from 'astro/config'
 import UnoCSS from 'unocss/astro'
 import { themeConfig } from './src/.config'
 import compress from '@playform/compress';
+import indexnow from 'astro-indexnow';
+import cloudflare from '@astrojs/cloudflare';
+import { satteri } from '@astrojs/markdown-satteri';
+import { katex as satteriKatex } from '@nullpinter/satteri-katex';
 
 // https://astro.build/config
 export default defineConfig({
   site: themeConfig.site.website,
   prefetch: true,
   base: '/',
+
   vite: {
     environments: {
       client: {
@@ -19,7 +24,7 @@ export default defineConfig({
           rollupOptions: {
             output: {
               entryFileNames: 'js/[hash:8].js',
-              chunkFileNames: 'js/chunks/[hash:8].js',
+              chunkFileNames: 'js/[hash:8].js',
               assetFileNames: 'asset/[hash:8][extname]',
               hashCharacters: 'hex',
             },
@@ -31,13 +36,14 @@ export default defineConfig({
       rollupOptions: {
         output: {
           entryFileNames: 'js/[hash:8].js',
-          chunkFileNames: 'js/chunks/[hash:8].js',
+          chunkFileNames: 'js/[hash:8].js',
           assetFileNames: 'asset/[hash:8][extname]',
           hashCharacters: 'hex',
         },
       },
     },
   },
+
   markdown: {
     shikiConfig: {
       themes: {
@@ -46,12 +52,24 @@ export default defineConfig({
       },
       wrap: true,
     },
+    processor: satteri({
+      features: {
+        math: true,
+      },
+      mdastPlugins: [satteriKatex()],
+    }),
   },
+
   integrations: [
     UnoCSS({ injectReset: true }),
     mdx({}),
     robotsTxt(),
     sitemap(),
+    indexnow({
+      key: process.env.INDEXNOW_KEY,
+      // dryRun: true,
+      submissionMode: "all",
+    }),
     compress(),
     swup({
       theme: false,
@@ -60,9 +78,11 @@ export default defineConfig({
       preload: true,
       accessibility: true,
       smoothScrolling: true,
-      updateHead: true,
-      updateBodyClass: true,
+      updateHead: false,
+      updateBodyClass: false,
       containers: ['#toc-container', "main"],
     }),
   ],
+
+  adapter: cloudflare(),
 })

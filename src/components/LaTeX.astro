@@ -1,17 +1,14 @@
 ---
-import { themeConfig } from '~/.config'
+import { themeConfig } from "~/.config";
 
-const { latex } = themeConfig
+const { latex } = themeConfig;
 
-const katex = latex.katex
+const katex = latex.katex;
+
+import "katex/dist/katex.min.css";
 ---
 
-{
-  katex && (
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
-      crossorigin="anonymous"
-    />
-  )
-}
+<!--
+{katex && (
+  <link rel="stylesheet" href="@/katex/katex.min.css" crossorigin="anonymous" />
+)} -->
