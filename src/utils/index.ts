@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content'
 import dayjs from 'dayjs'
 import MarkdownIt from 'markdown-it'
 import sanitizeHtml from 'sanitize-html'
+import { pinyin } from "pinyin-pro";
 
 export async function getCategories() {
   const posts = await getPosts()
@@ -34,6 +35,8 @@ export async function getPosts(isArchivePage = false) {
 
     return aDate.isBefore(bDate) ? 1 : -1
   })
+
+  posts.forEach((post) => { post.id = pinyin(post.id, { toneType: "none", type: "array" }).join("") })
 
   if (import.meta.env.PROD) {
     return posts.filter(post => post.data.draft !== true)
