@@ -19,7 +19,18 @@ export async function getCategories() {
     }
   }
 
-  return categories
+  const result = new Map<string, Post[]>();
+
+  for (const [key, value] of categories) {
+    let pinyinKey = pinyin(key, { toneType: "none", type: "array" }).join("");
+    let i = 2;
+    if (result.has(pinyinKey)) {
+      pinyinKey = `${pinyin(key, { toneType: "none", type: "array" }).join("")}-${i++}`;
+    }
+    result.set(pinyinKey, value);
+  }
+
+  return result
 }
 
 export async function getPosts(isArchivePage = false) {
