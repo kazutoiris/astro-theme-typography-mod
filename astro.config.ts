@@ -64,7 +64,7 @@ export default defineConfig({
     UnoCSS({ injectReset: true }),
     mdx({}),
     robotsTxt(),
-    sitemap(),
+    sitemap({ lastmod: new Date() }),
     indexnow({
       key: process.env.INDEXNOW_KEY,
       // dryRun: true,
