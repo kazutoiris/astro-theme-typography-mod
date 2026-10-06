@@ -5,6 +5,8 @@ import MarkdownIt from 'markdown-it'
 import sanitizeHtml from 'sanitize-html'
 import { pinyin } from "pinyin-pro";
 
+let originalKeys = new Map<string, string>();
+
 export async function getCategories() {
   const posts = await getPosts()
   const categories = new Map<string, Post[]>()
@@ -20,14 +22,23 @@ export async function getCategories() {
   }
 
   const result = new Map<string, Post[]>();
-
+  let originalKeysExists = originalKeys && originalKeys.size > 0;
   for (const [key, value] of categories) {
+    if (originalKeysExists) {
+      let newKey = originalKeys.get(key);
+      if (!newKey) {
+        throw new Error(`Can not find: ${key}`);
+      }
+      result.set(newKey, value);
+      continue;
+    }
     let pinyinKey = pinyin(key, { toneType: "none", type: "array" }).join("").toLowerCase();
     let i = 2;
     if (result.has(pinyinKey)) {
       pinyinKey = `${pinyin(key, { toneType: "none", type: "array" }).join("")}-${i++}`.toLowerCase();
     }
     result.set(pinyinKey, value);
+    originalKeys.set(key, pinyinKey);
   }
 
   return result
@@ -76,5 +87,5 @@ export function getPathFromCategory(
   category_map: { name: string, path: string }[],
 ) {
   const mappingPath = category_map.find(l => l.name === category)
-  return mappingPath ? mappingPath.path : category
+  return mappingPath ? mappingPath.path : originalKeys.get(category)
 }
