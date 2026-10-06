@@ -29,7 +29,7 @@ const { headings } = Astro.props;
     </slot>
     <LaTeX />
     <Analytics />
-    <ThemeScript />
+    <!-- <ThemeScript /> -->
   </head>
 
   <body
@@ -45,62 +45,66 @@ const { headings } = Astro.props;
         <SiteTitle />
         <SiteNavigation />
         <div id="toc-container" class="transition-swup-main">
-          {headings && headings.length > 0 ? (
-            <div
-              class="mt-auto overflow-y-auto hidden max-h-full min-h-0"
-              m="block"
-              lg="block"
-            >
-              <TOC headings={headings} />
-            </div>
-          ) : (
-            <div class="hidden m-0" m="block" lg="block">
-              <div class="flex flex-col items-center rounded-2xl border border-primary border-dashed py-2 text-center w-40">
-                <div class="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-yellow-300/10 ring-2 ring-amber-300/70 shadow-[0_0_34px_-10px_rgba(250,204,21,0.55)]">
-                  <a
-                    href={`https://github.com/kazutoiris`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="not-underline-hover"
-                  >
-                    <img
-                      src="https://avatars.githubusercontent.com/u/78157415?v=4"
-                      alt="kazutoiris"
-                      class="relative h-20 w-20 rounded-full object-cover avatar-spin"
-                    />
-                  </a>
-                </div>
-
-                <a
-                  href="https://ghfind.com/u/kazutoiris"
-                  class="decoration-none not-underline-hover"
-                >
-                  {" "}
-                  <div class="mt-4 tabular-nums">
-                    <span class="text-xl font-black bg-gradient-to-b from-amber-300 via-yellow-500 to-amber-700 bg-clip-text text-transparent">
-                      80.70
-                    </span>
-                    <span class="text-xs">/100</span>
+          {
+            headings && headings.length > 0 ? (
+              <div
+                class="mt-auto overflow-y-auto hidden max-h-full min-h-0"
+                m="block"
+                lg="block"
+              >
+                <TOC headings={headings} />
+              </div>
+            ) : (
+              <div class="hidden m-0" m="block" lg="block">
+                <div class="flex flex-col items-center rounded-2xl border border-primary border-dashed py-2 text-center w-40">
+                  <div class="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-yellow-300/10 ring-2 ring-amber-300/70 shadow-[0_0_34px_-10px_rgba(250,204,21,0.55)]">
+                    <a
+                      href={`https://github.com/kazutoiris`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="not-underline-hover"
+                    >
+                      <img
+                        src="https://avatars.githubusercontent.com/u/78157415?v=4"
+                        alt="kazutoiris"
+                        class="relative h-20 w-20 rounded-full object-cover avatar-spin"
+                      />
+                    </a>
                   </div>
-                </a>
-                <div class="mt-1 text-xl font-bold text-amber-600">🥇 顶级</div>
-                <div class="mt-1 text-sm font-medium text-primary">
-                  顶级开发者 · 一线水准
-                </div>
 
-                <div class="flex flex-wrap items-center justify-center gap-1.5">
                   <a
-                    href={`https://github.com/apache`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="rounded-full px-2.5 py-0.5 text-xs decoration-none"
+                    href="https://ghfind.com/u/kazutoiris"
+                    class="decoration-none not-underline-hover"
                   >
-                    @apache
+                    {" "}
+                    <div class="mt-4 tabular-nums">
+                      <span class="text-xl font-black bg-gradient-to-b from-amber-300 via-yellow-500 to-amber-700 bg-clip-text text-transparent">
+                        80.70
+                      </span>
+                      <span class="text-xs">/100</span>
+                    </div>
                   </a>
+                  <div class="mt-1 text-xl font-bold text-amber-600">
+                    🥇 顶级
+                  </div>
+                  <div class="mt-1 text-sm font-medium text-primary">
+                    顶级开发者 · 一线水准
+                  </div>
+
+                  <div class="flex flex-wrap items-center justify-center gap-1.5">
+                    <a
+                      href={`https://github.com/apache`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="rounded-full px-2.5 py-0.5 text-xs decoration-none"
+                    >
+                      @apache
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )
+          }
         </div>
       </div>
     </header>
