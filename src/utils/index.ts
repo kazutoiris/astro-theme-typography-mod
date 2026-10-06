@@ -22,10 +22,10 @@ export async function getCategories() {
   const result = new Map<string, Post[]>();
 
   for (const [key, value] of categories) {
-    let pinyinKey = pinyin(key, { toneType: "none", type: "array" }).join("");
+    let pinyinKey = pinyin(key, { toneType: "none", type: "array" }).join("").toLowerCase();
     let i = 2;
     if (result.has(pinyinKey)) {
-      pinyinKey = `${pinyin(key, { toneType: "none", type: "array" }).join("")}-${i++}`;
+      pinyinKey = `${pinyin(key, { toneType: "none", type: "array" }).join("")}-${i++}`.toLowerCase();
     }
     result.set(pinyinKey, value);
   }
@@ -47,7 +47,7 @@ export async function getPosts(isArchivePage = false) {
     return aDate.isBefore(bDate) ? 1 : -1
   })
 
-  posts.forEach((post) => { post.id = pinyin(post.id, { toneType: "none", type: "array" }).join("") })
+  posts.forEach((post) => { post.id = pinyin(post.id, { toneType: "none", type: "array" }).join("").toLowerCase() })
 
   if (import.meta.env.PROD) {
     return posts.filter(post => post.data.draft !== true)
