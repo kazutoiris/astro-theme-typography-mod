@@ -41,7 +41,7 @@ export async function getCategories() {
     originalKeys.set(key, pinyinKey);
   }
 
-  return result
+  return categories
 }
 
 export async function getPosts(isArchivePage = false) {
