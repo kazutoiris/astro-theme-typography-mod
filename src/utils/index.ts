@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it'
 import sanitizeHtml from 'sanitize-html'
 import { pinyin } from "pinyin-pro";
 
-let originalKeys = new Map<string, string>();
+const originalKeys = new Map<string, string>();
 
 export async function getCategories() {
   const posts = await getPosts()
@@ -21,24 +21,20 @@ export async function getCategories() {
     }
   }
 
-  const result = new Map<string, Post[]>();
-  let originalKeysExists = originalKeys && originalKeys.size > 0;
-  for (const [key, value] of categories) {
-    if (originalKeysExists) {
-      let newKey = originalKeys.get(key);
-      if (!newKey) {
-        throw new Error(`Can not find: ${key}`);
+  if (originalKeys.size == 0) {
+    for (const key of categories.keys()) {
+      const base = pinyin(key, { toneType: "none", type: "array" })
+        .join("")
+        .toLowerCase();
+      let pinyinKey = base;
+      let i = 2;
+      const usedPinyins = new Set(originalKeys.values());
+      while (usedPinyins.has(pinyinKey)) {
+        pinyinKey = `${base}-${i++}`;
       }
-      result.set(newKey, value);
-      continue;
+
+      originalKeys.set(key, pinyinKey);
     }
-    let pinyinKey = pinyin(key, { toneType: "none", type: "array" }).join("").toLowerCase();
-    let i = 2;
-    if (result.has(pinyinKey)) {
-      pinyinKey = `${pinyin(key, { toneType: "none", type: "array" }).join("")}-${i++}`.toLowerCase();
-    }
-    result.set(pinyinKey, value);
-    originalKeys.set(key, pinyinKey);
   }
 
   return categories
