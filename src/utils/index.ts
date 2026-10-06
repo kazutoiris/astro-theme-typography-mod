@@ -87,5 +87,5 @@ export function getPathFromCategory(
   category_map: { name: string, path: string }[],
 ) {
   const mappingPath = category_map.find(l => l.name === category)
-  return mappingPath ? mappingPath.path : category
+  return mappingPath ? mappingPath.path : (originalKeys.get(category) ?? category)
 }
