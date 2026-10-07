@@ -9,8 +9,8 @@ export const userConfig: Partial<UserConfig> = {
     title: '瞳の笔记',
     subtitle: "Hitomi's Note",
     author: 'Kazuto Iris',
-    description: 'Set Sail Anew',
-    website: 'https://hitomi.us.kg/',
+    description: "Set Sail Anew — Next Generation of Hitomi's Note",
+    website: 'https://hitomi.pp.ua/',
     pageSize: 10,
     socialLinks: [
       {
