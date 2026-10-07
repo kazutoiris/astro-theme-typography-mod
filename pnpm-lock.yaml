@@ -285,9 +285,9 @@ importers:
       sanitize-html:
         specifier: ^2.17.0
         version: 2.18.0
-      satteri:
-        specifier: ^0.10.5
-        version: 0.10.5
+      satteri-external-links:
+        specifier: ^0.1.1
+        version: 0.1.1(satteri@0.10.5)
       sharp:
         specifier: ^0.35.5
         version: 0.35.5(@types/node@26.6.4)
@@ -4658,6 +4658,11 @@ packages:
   sanitize-html@2.18.0:
     resolution: {integrity: sha512-CvY+PV+NBhxe3BnjFI5f//vEDKLULm9OlZArso7gdgVsWvanBuq9PNDx+/2llfL+8XFYa/UNBxvqRBg3TWU2Ug==}
     engines: {node: '>=22.12.0'}
+
+  satteri-external-links@0.1.1:
+    resolution: {integrity: sha512-E9jTXX4eYPLO2XaEQxd+/Ulhi4Q9ZA42ig+i4ZgnutNp9XomqN+wN8TFlyaEf8XT//D8jrW2NFwtKb0bHE0xiw==}
+    peerDependencies:
+      satteri: '>=0.7.0'
 
   satteri@0.10.5:
     resolution: {integrity: sha512-Ao1LKpAEa9Wdg0otgbVKViZHEq9ebdXe4DMrp3s9vQAU0HNIuHnFEuMuOcm0ZIXyV0Yzxj91NvhLpvXZJO/5ZQ==}
@@ -9888,6 +9893,10 @@ snapshots:
       launder: 1.7.2
       parse-srcset: 1.0.2
       postcss: 8.5.28
+
+  satteri-external-links@0.1.1(satteri@0.10.5):
+    dependencies:
+      satteri: 0.10.5
 
   satteri@0.10.5:
     dependencies:

@@ -10,21 +10,7 @@ import indexnow from 'astro-indexnow';
 import cloudflare from '@astrojs/cloudflare';
 import { satteri } from '@astrojs/markdown-satteri';
 import { katex as satteriKatex } from '@nullpinter/satteri-katex';
-import { defineHastPlugin } from 'satteri';
-
-const externalLinks = defineHastPlugin({
-  name: "external-links",
-  element: {
-    filter: ["a"],
-    visit(node, ctx) {
-      const href = node.properties.href;
-      if (typeof href === "string" && href.startsWith("http")) {
-        ctx.setProperty(node, "target", "_blank");
-        ctx.setProperty(node, "rel", "noopener noreferrer");
-      }
-    },
-  },
-});
+import satteriExternalLinks from "satteri-external-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -72,7 +58,7 @@ export default defineConfig({
         math: true,
       },
       mdastPlugins: [satteriKatex()],
-      hastPlugins: [externalLinks]
+      hastPlugins: [satteriExternalLinks()]
     }),
   },
 

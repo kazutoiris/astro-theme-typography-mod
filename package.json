@@ -51,7 +51,7 @@
     "markdown-it": "^15.0.2",
     "pinyin-pro": "^3.29.4",
     "sanitize-html": "^2.17.0",
-    "satteri": "^0.10.5",
+    "satteri-external-links": "^0.1.1",
     "sharp": "^0.35.5",
     "tsx": "^4.20.3",
     "typescript": "7.1.0-dev.20261001.1",
