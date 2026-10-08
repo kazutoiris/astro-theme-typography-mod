@@ -10,6 +10,7 @@ import ThemeScript from "~/components/ThemeScript.astro";
 import "~/styles/global.css";
 import type { MarkdownHeading } from "astro";
 import TOC from "~/components/TOC.astro";
+import { getGhfindScore } from "~/utils/ghfind";
 
 const lang = themeConfig.appearance.locale ?? "en-us";
 const dark = themeConfig.appearance.theme === "dark";
@@ -17,6 +18,8 @@ const dark = themeConfig.appearance.theme === "dark";
 interface Props {
   headings?: MarkdownHeading[];
 }
+
+const ghfindScore = await getGhfindScore();
 
 const { headings } = Astro.props;
 ---
@@ -76,16 +79,15 @@ const { headings } = Astro.props;
                     href="https://ghfind.com/u/kazutoiris"
                     class="decoration-none not-underline-hover"
                   >
-                    {" "}
                     <div class="mt-4 tabular-nums">
                       <span class="text-xl font-black bg-gradient-to-b from-amber-300 via-yellow-500 to-amber-700 bg-clip-text text-transparent">
-                        80.70
+                        {ghfindScore.score}
                       </span>
                       <span class="text-xs">/100</span>
                     </div>
                   </a>
                   <div class="mt-1 text-xl font-bold text-amber-600">
-                    🥇 顶级
+                    🥇 {ghfindScore.badge}
                   </div>
                   <div class="mt-1 text-sm font-medium text-primary">
                     顶级开发者 · 一线水准
