@@ -13,7 +13,7 @@ export async function getGhfindScore(): Promise<Ghfind> {
     const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
     if (!titleMatch) throw new Error("title parse fail " + html);
     const title = titleMatch[1];
-    const scoreMatch = title.match(/—(.*?)\/100.*?·(.*?)\|/);
+    const scoreMatch = title.match(/—(.*?)\·(.*?)\|/);
     if (!scoreMatch || !scoreMatch[1] || !scoreMatch[2]) {
         throw new Error("score parse fail " + title);
     }
